@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes" />
+    <title>اتمیر | ATMIR — طراحی وب مدرن</title>
+
+    <!-- Font: Estedad -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/estedad-font@v1.0.0/fonts/estedad.css" />
+
+    <!-- Font Awesome 6 (Free) for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        /* ---------- RESET & BASE ---------- */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #818cf8;
+            --primary-dark: #3730a3;
+            --accent: #f59e0b;
+            --accent-light: #fbbf24;
+            --bg-light: #f8fafc;
+            --bg-card: rgba(255, 255, 255, 0.75);
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+            --text-light: #f1f5f9;
+            --glass-bg: rgba(255, 255, 255, 0.35);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.08);
+            --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --font: 'Estedad', 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.7;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ---------- BUTTONS ---------- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 28px;
+            border-radius: 60px;
+            font-family: var(--font);
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.25);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.35);
+            background: var(--primary-dark);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .btn-accent {
+            background: var(--accent);
+            color: #0f172a;
+            box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-accent:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        /* ---------- HEADER (Glass) ---------- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 16px 0;
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            background: rgba(255, 255, 255, 0.65);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.06);
+            padding: 12px 0;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .logo span {
+            font-weight: 400;
+            -webkit-text-fill-color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            transition: var(--transition);
+            position: relative;
+            padding: 4px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-cta {
+            background: var(--primary) !important;
+            color: #fff !important;
+            padding: 10px 24px !important; /* پدینگ استاندارد برای متناسب شدن پس‌زمینه */
+            border-radius: 40px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1; /* جلوگیری از کشیده شدن یا چسبیدن متن به سقف و کف */
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        /* Mobile hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px;
+            background: transparent;
+            border: none;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2.5px;
+            background: var(--text-dark);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ---------- HERO ---------- */
+        .hero {
+            padding: 140px 0 80px;
+            background: linear-gradient(160deg, #eef2ff 0%, #f8fafc 70%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(79, 70, 229, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 20px;
+            max-width: 750px;
+        }
+
+        .hero-title {
+            font-size: clamp(2.2rem, 5vw, 3.4rem);
+            font-weight: 800;
+            line-height: 1.3;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-title .highlight {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            line-height: 1.8;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 10px;
+        }
+
+        /* ---------- SECTION TITLES ---------- */
+        .section {
+            padding: 70px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 44px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            max-width: 580px;
+            margin: 8px auto 0;
+        }
+
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(79, 70, 229, 0.08);
+            color: var(--primary);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 4px 14px;
+            border-radius: 40px;
+            letter-spacing: 0.3px;
+            margin-bottom: 10px;
+        }
+
+        /* ---------- PROJECTS ---------- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 28px;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .project-img {
+            height: 210px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .project-img .demo-badge {
+            position: absolute;
+            bottom: 14px;
+            right: 14px;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(6px);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .project-body {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .project-body h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .project-body p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .project-body .btn-sm {
+            align-self: flex-start;
+            padding: 8px 18px;
+            font-size: 0.85rem;
+            border-radius: 40px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            font-family: var(--font);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .project-body .btn-sm:hover {
+            background: var(--primary-dark);
+            transform: translateX(-3px);
+        }
+
+        .project-img {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            border-radius: 14px 14px 0 0;
+        }
+
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .demo-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+        }
+
+        /* ---------- SERVICES ---------- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .service-item {
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: var(--radius-md);
+            padding: 28px 22px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .service-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-light);
+        }
+
+        .service-item .icon {
+            font-size: 2.3rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .service-item h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .service-item p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* ---------- PROCESS ---------- */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 24px 16px;
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            transition: var(--transition);
+        }
+
+        .process-step:hover {
+            transform: translateY(-4px);
+        }
+
+        .process-step .step-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #fff;
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-bottom: 14px;
+            box-shadow: 0 6px 16px rgba(79, 70, 229, 0.25);
+        }
+
+        .process-step h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        .process-step p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            margin-top: 6px;
+        }
+
+        /* ---------- WHY ME ---------- */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .why-item {
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 28px 20px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            transition: var(--transition);
+        }
+
+        .why-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .why-item .icon {
+            font-size: 2.2rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .why-item h4 {
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+
+        .why-item p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            margin-top: 6px;
+        }
+
+        /* ---------- FAQ ---------- */
+        .faq-list {
+            max-width: 760px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .faq-item {
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faq-question {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            font-weight: 600;
+            font-size: 0.98rem;
+            cursor: pointer;
+            user-select: none;
+            gap: 16px;
+        }
+
+        .faq-question i {
+            transition: var(--transition);
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            padding: 0 20px;
+            overflow: hidden;
+            transition: max-height 0.35s ease, padding 0.3s ease;
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            line-height: 1.8;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding: 0 20px 18px;
+        }
+
+        /* ---------- CONTACT ---------- */
+        .contact-wrap {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 16px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary-light);
+        }
+
+        .contact-item .icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            width: 40px;
+            text-align: center;
+        }
+
+        .contact-item .info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-item .label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .contact-item .value {
+            font-weight: 600;
+            font-size: 0.98rem;
+        }
+
+        .contact-actions {
+            margin-top: 24px;
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ---------- FOOTER ---------- */
+        footer {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 48px 0 24px;
+            border-radius: 32px 32px 0 0;
+            margin-top: 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 36px;
+            margin-bottom: 36px;
+        }
+
+        .footer-brand .logo {
+            -webkit-text-fill-color: #fff;
+            background: none;
+            color: #fff;
+            font-size: 1.7rem;
+        }
+
+        .footer-brand .logo span {
+            -webkit-text-fill-color: #94a3b8;
+        }
+
+        .footer-brand p {
+            color: #94a3b8;
+            margin-top: 10px;
+            max-width: 320px;
+            font-size: 0.9rem;
+        }
+
+        .footer-links h5 {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 14px;
+            color: #fff;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+            padding-right: 4px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #1e293b;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 80px 24px 30px;
+                gap: 16px;
+                transform: translateY(-120%);
+                transition: transform 0.35s ease;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+                border-radius: 0 0 24px 24px;
+                align-items: stretch;
+                text-align: center;
+            }
+
+            .nav-links.open {
+                transform: translateY(0);
+            }
+
+            .nav-links a {
+                font-size: 1.05rem;
+                padding: 8px 0;
+            }
+
+            .hamburger {
+                display: flex;
+                z-index: 1001;
+            }
+
+            .hero {
+                padding: 120px 0 60px;
+                min-height: auto;
+            }
+
+            .section {
+                padding: 50px 0;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .contact-actions {
+                flex-direction: column;
+            }
+
+            .contact-actions .btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 12px 20px;
+            }
+
+            .hero-actions {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .contact-item .value {
+                font-size: 0.88rem;
+                word-break: break-all;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ========== HEADER ========== -->
+    <header id="header">
+        <div class="container header-inner">
+            <a href="#" class="logo">
+                اتمیر <span>| ATMIR</span>
+            </a>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#projects">نمونه‌کارها</a></li>
+                <li><a href="#services">خدمات</a></li>
+                <li><a href="#process">روند کار</a></li>
+                <li><a href="#why">چرا من؟</a></li>
+                <li><a href="#faq">سوالات</a></li>
+                <li><a href="#contact" class="nav-cta">تماس</a></li>
+            </ul>
+
+            <button class="hamburger" id="hamburger" aria-label="منو">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ========== HERO ========== -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <span class="section-tag"><i class="fas fa-code"></i> توسعه‌دهنده وب</span>
+                <h1 class="hero-title">
+                    وب‌سایت حرفه‌ای<br />
+                    <span class="highlight">برای کسب‌وکار شما</span>
+                </h1>
+                <p class="hero-sub">
+                    از منوی دیجیتال و فروشگاه ساده تا لندینگ مدرن — همه‌چیز با UX عالی،
+                    کد تمیز و تحویل سریع.
+                </p>
+                <div class="hero-actions">
+                    <a href="#projects" class="btn btn-accent">
+                        <i class="fas fa-arrow-left"></i> نمونه‌کارها
+                    </a>
+                    <a href="#contact" class="btn btn-outline">
+                        <i class="fas fa-phone"></i> تماس بگیرید
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PROJECTS ========== -->
+    <section class="section" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag"><i class="fas fa-star"></i> منتخب</span>
+                <h2>نمونه‌کارهای اخیر</h2>
+                <p>چند پروژه‌ای که با دقت بالا طراحی شده‌اند.</p>
+            </div>
+            <div class="projects-grid">
+
+                <!-- project 1 -->
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="images/pr1.png" alt="منو دیجیتال رستوران">
+                    </div>
+
+                    <div class="project-body">
+                        <h3>منو دیجیتال رستوران</h3>
+                        <p>منوی دیجیتال مدرن با نمایش دسته‌بندی غذاها، طراحی واکنش‌گرا و تجربه کاربری ساده برای رستوران‌ها.</p>
+                        <a href="#" class="btn-sm">
+                            <i class="fas fa-arrow-left"></i> مشاهده دمو
+                        </a>
+                    </div>
+                </div>
+
+
+                 <!-- project 2 -->
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="images/pr2.png" alt="سایت آرایشگاه مردانه">
+                    </div>
+
+                    <div class="project-body">
+                        <h3>سایت معرفی آرایشگاه مردانه</h3>
+                        <p>سایت کسب‌وکاری مدرن برای معرفی خدمات، نمونه‌کارها، اطلاعات تماس و جذب مشتریان جدید.</p>
+                        <a href="#" class="btn-sm">
+                            <i class="fas fa-arrow-left"></i> مشاهده دمو
+                        </a>
+                    </div>
+                </div>
+
+
+
+                <!-- project 3 -->
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="images/pr3.png" alt="سیستم مدیریت نوبت">
+                    </div>
+
+                    <div class="project-body">
+                        <h3>سیستم مدیریت نوبت</h3>
+                        <p>اپلیکیشن سبک مدیریت نوبت با تقویم شمسی، ثبت مشتری، گزارش‌گیری و طراحی مناسب موبایل و دسکتاپ.</p>
+                        <a href="#" class="btn-sm">
+                            <i class="fas fa-arrow-left"></i> مشاهده دمو
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SERVICES ========== -->
+    <section class="section" id="services" style="background: #f1f5f9;">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag"><i class="fas fa-cogs"></i> تخصص‌ها</span>
+                <h2>خدماتی که ارائه می‌دهم</h2>
+                <p>از وب‌سایت معرفی تا ابزارهای تحت وب — همه‌چیز با کیفیت بالا.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-item">
+                    <div class="icon"><i class="fas fa-globe"></i></div>
+                    <h4>وب‌سایت معرفی</h4>
+                    <p>برای شرکت‌ها، فروشگاه‌ها، رستوران‌ها و برندهای شخصی</p>
+                </div>
+                <div class="service-item">
+                    <div class="icon"><i class="fas fa-bullseye"></i></div>
+                    <h4>لندینگ پیج حرفه‌ای</h4>
+                    <p>معرفی محصول، کمپین، تبلیغات و جذب مشتری</p>
+                </div>
+                <div class="service-item">
+                    <div class="icon"><i class="fas fa-shopping-cart"></i></div>
+                    <h4>فروشگاهی ساده</h4>
+                    <p>معرفی و فروش محصولات با تجربه کاربری عالی</p>
+                </div>
+                <div class="service-item">
+                    <div class="icon"><i class="fas fa-paint-brush"></i></div>
+                    <h4>رابط کاربری مدرن</h4>
+                    <p>صفحات و داشبوردهای زیبا و ساده</p>
+                </div>
+                <div class="service-item">
+                    <div class="icon"><i class="fas fa-user-tie"></i></div>
+                    <h4>سایت رزومه و شخصی</h4>
+                    <p>برای فریلنسرها، متخصصان و برند شخصی</p>
+                </div>
+                <div class="service-item">
+                    <div class="icon"><i class="fas fa-qrcode"></i></div>
+                    <h4>منو دیجیتال &amp; رستورانی</h4>
+                    <p>نمایش منو، خدمات و اطلاعات کسب‌وکارهای غذایی</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PROCESS ========== -->
+    <section class="section" id="process">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag"><i class="fas fa-route"></i> مسیر</span>
+                <h2>روند کاری من</h2>
+                <p>از ایده اولیه تا تحویل نهایی، قدم‌به‌قدم با شما هستم.</p>
+            </div>
+
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-num">۱</div>
+                    <h4>گفتگو و ایده‌پردازی</h4>
+                    <p>شنیدن نیازها، هدف‌گذاری و ترسیم نقشه راه</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-num">۲</div>
+                    <h4>طراحی UI/UX</h4>
+                    <p>ایجاد وایرفریم، نمونه اولیه و تأیید طراحی</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-num">۳</div>
+                    <h4>توسعه و کدنویسی</h4>
+                    <p>پیاده‌سازی با کد تمیز، واکنش‌گرا و بهینه</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-num">۴</div>
+                    <h4>تست &amp; بازخورد</h4>
+                    <p>بررسی عملکرد، رفع اشکال و اعمال تغییرات</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-num">۵</div>
+                    <h4>تحویل و پشتیبانی</h4>
+                    <p>راه‌اندازی، آموزش و پشتیبانی پس از تحویل</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== WHY ME ========== -->
+    <section class="section" id="why" style="background: #f1f5f9;">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag"><i class="fas fa-check-circle"></i> مزیت</span>
+                <h2>چرا همکاری با من؟</h2>
+                <p>دلایلی که باعث می‌شود پروژه‌تان در دستان امنی باشد.</p>
+            </div>
+
+            <div class="why-grid">
+                <div class="why-item">
+                    <div class="icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h4>طراحی موبایل‌محور</h4>
+                    <p>همه پروژه‌ها ابتدا برای موبایل طراحی و سپس برای دسکتاپ بهینه می‌شوند.</p>
+                </div>
+                <div class="why-item">
+                    <div class="icon"><i class="fas fa-tachometer-alt"></i></div>
+                    <h4>سرعت و عملکرد بالا</h4>
+                    <p>کد تمیز، بهینه و سبک که بارگذاری سریعی را تضمین می‌کند.</p>
+                </div>
+                <div class="why-item">
+                    <div class="icon"><i class="fas fa-heart"></i></div>
+                    <h4>تجربه کاربری عالی</h4>
+                    <p>تمرکز بر UX باعث می‌شود کاربران به‌راحتی در سایت شما بچرخند.</p>
+                </div>
+                <div class="why-item">
+                    <div class="icon"><i class="fas fa-headset"></i></div>
+                    <h4>پشتیبانی و مشاوره</h4>
+                    <p>تا ۳۰ روز پس از تحویل، کنار شما هستم تا همه‌چیز بی‌نقص باشد.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FAQ ========== -->
+    <section class="section" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag"><i class="fas fa-question-circle"></i> پرسش‌ها</span>
+                <h2>سوالات متداول</h2>
+                <p>پاسخ به سوالاتی که معمولاً قبل از شروع همکاری پرسیده می‌شوند.</p>
+            </div>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>هزینه طراحی سایت چقدر است؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        هزینه بستگی به پیچیدگی و تعداد صفحات پروژه دارد. اما با بودجه‌های مختلف، یک راهکار مناسب ارائه می‌دهم. برای دریافت مشاوره دقیق با من تماس بگیرید.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>آیا امکان اعمال تغییرات در حین کار وجود دارد؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        بله، در مرحله طراحی (وایرفریم) و پس از ارائه نسخه اولیه، می‌توانید بازخورد خود را بدهید تا خروجی نهایی دقیقاً مطابق انتظار شما باشد.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>چقدر زمان می‌برد تا سایت آماده شود؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        پروژه‌های ساده (لندینگ یا منو) معمولاً ۳ تا ۵ روز کاری، و پروژه‌های فروشگاهی یا وب‌اپلیکیشن بین ۷ تا ۱۴ روز کاری زمان می‌برند.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>آیا بعد از تحویل، پشتیبانی دارید؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        بله، تا ۳۰ روز پس از تحویل، هرگونه مشکل فنی یا نیاز به تغییرات جزئی را رایگان انجام می‌دهم. همچنین برای هر سؤالی همیشه در دسترس هستم.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>آیا کد سایت را تحویل می‌گیرم؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        قطعاً. تمام فایل‌های پروژه (کد، تصاویر، داکیومنت) را در اختیار شما قرار می‌دهم تا مالکیت کامل داشته باشید.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CONTACT ========== -->
+    <section class="section" id="contact" style="background: #f1f5f9;">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag"><i class="fas fa-paper-plane"></i> ارتباط</span>
+                <h2>راه‌های ارتباطی</h2>
+                <p>منتظر پیام شما هستم تا پروژه‌تان را به بهترین شکل پیش ببریم.</p>
+            </div>
+
+            <div class="contact-wrap">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="icon"><i class="fas fa-phone-alt"></i></div>
+                        <div class="info">
+                            <span class="label">تلفن</span>
+                            <span class="value" dir="ltr">۰۹۹۴۵۲۴۲۷۱۵</span>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="icon"><i class="fas fa-envelope"></i></div>
+                        <div class="info">
+                            <span class="label">ایمیل</span>
+                            <span class="value" dir="ltr">amirata.dev@gmail.com</span>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="icon"><i class="fab fa-telegram"></i></div>
+                        <div class="info">
+                            <span class="label">تلگرام</span>
+                            <span class="value" dir="ltr">@its_amirata</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-actions">
+                    <a href="tel:09945242715" class="btn"><i class="fas fa-phone"></i> تماس فوری</a>
+                    <a href="https://t.me/its_amirata" target="_blank" class="btn btn-outline"><i class="fab fa-telegram"></i> پیام در تلگرام</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">اتمیر <span>| ATMIR</span></div>
+                    <p>طراحی و توسعه وب مدرن با تمرکز بر تجربه کاربری عالی و کد تمیز. همراه شما از ایده تا اجرا.</p>
+                </div>
+                <div class="footer-links">
+                    <h5>دسترسی سریع</h5>
+                    <ul>
+                        <li><a href="#projects">نمونه‌کارها</a></li>
+                        <li><a href="#services">خدمات</a></li>
+                        <li><a href="#process">روند کار</a></li>
+                        <li><a href="#faq">سوالات</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h5>ارتباط</h5>
+                    <ul>
+                        <li><a href="tel:09945242715">۰۹۹۴۵۲۴۲۷۱۵</a></li>
+                        <li><a href="mailto:amirata.dev@gmail.com">amirata.dev@gmail.com</a></li>
+                        <li><a href="https://t.me/its_amirata" target="_blank">@its_amirata</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>© ۲۰۲۶ اتمیر | تمامی حقوق محفوظ است.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== SCRIPTS ========== -->
+    <script>
+        (function() {
+            // ---------- HAMBURGER ----------
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('navLinks');
+
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    this.classList.toggle('active');
+                    navLinks.classList.toggle('open');
+                });
+
+                // Close menu on link click (mobile)
+                navLinks.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('open');
+                    });
+                });
+
+                // Close menu on outside click
+                document.addEventListener('click', function(e) {
+                    if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('open');
+                    }
+                });
+            }
+
+            // ---------- HEADER SCROLL EFFECT ----------
+            const header = document.getElementById('header');
+
+            window.addEventListener('scroll', function() {
+                const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+                if (currentScroll > 20) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // ---------- FAQ ACCORDION ----------
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                if (question) {
+                    question.addEventListener('click', function() {
+                        faqItems.forEach(other => {
+                            if (other !== item && other.classList.contains('active')) {
+                                other.classList.remove('active');
+                            }
+                        });
+                        item.classList.toggle('active');
+                    });
+                }
+            });
+
+            if (faqItems.length > 0) {
+                faqItems[0].classList.add('active');
+            }
+
+            // ---------- SMOOTH SCROLL FOR ANCHOR LINKS ----------
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        e.preventDefault();
+                        const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - 75;
+                        window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+                    }
+                });
+            });
+
+        })();
+    </script>
+
+</body>
+</html>
