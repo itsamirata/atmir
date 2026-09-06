@@ -1304,13 +1304,57 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 8px;
+            margin-top: -40px;
+    	    margin-bottom: -40px;
         }
-        
+
         .hero-logo img {
             width: 100px;
             height: 100px;
             object-fit: contain;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            margin-top: -5px;
+            margin-bottom: -5px;
+
+        }
+        .hero-logo {
+            margin-top: -40px;
+            margin-bottom: -25px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-logo {
+                margin-top: -20px;
+                margin-bottom: -5px;
+            }
+
+            .hero-logo img {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-logo {
+                margin-top: -15px;
+                margin-bottom: 0;
+            }
+
+            .hero-logo img {
+                width: 80px;
+                height: 80px;
+            }
         }
     </style>
 </head>
@@ -1320,8 +1364,9 @@
     <header id="header">
         <div class="container header-inner">
             <a href="#" class="logo">
-                اتمیر <span>| ATMIR</span>
+                <img src="images/logo.svg" alt="ATMIR">
             </a>
+
             <ul class="nav-links" id="navLinks">
                 <li><a href="#projects">نمونه‌کارها</a></li>
                 <li><a href="#services">خدمات</a></li>
@@ -1330,6 +1375,7 @@
                 <li><a href="#faq">سوالات</a></li>
                 <li><a href="#contact" class="nav-cta">تماس</a></li>
             </ul>
+
             <button class="hamburger" id="hamburger" aria-label="منو">
                 <span></span><span></span><span></span>
             </button>
@@ -1340,22 +1386,22 @@
     <section class="hero">
         <div class="container hero-grid">
             <div class="hero-text">
-    
+
                 <!-- ATMIR Logo -->
                 <div class="hero-logo">
                     <img src="images/logo.svg" alt="ATMIR">
                 </div>
-    
+
                 <h1 class="hero-title">
                     وب‌سایت حرفه‌ای<br />
                     <span class="highlight">برای کسب‌وکار شما</span>
                 </h1>
-    
+
                 <p class="hero-sub">
                     از منوی دیجیتال و فروشگاه ساده تا لندینگ مدرن — همه‌چیز با UX عالی،
                     کد تمیز و تحویل سریع.
                 </p>
-    
+
                 <div class="hero-actions">
                     <a href="#projects" class="btn btn-orange">
                         <i class="fas fa-arrow-left"></i> نمونه‌کارها
@@ -1364,7 +1410,7 @@
                         <i class="fas fa-phone"></i> تماس بگیرید
                     </a>
                 </div>
-    
+
             </div>
         </div>
     </section>
