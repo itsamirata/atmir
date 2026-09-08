@@ -7,15 +7,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>اتمیر | ATMIR — طراحی وب‌سایت مدرن برای کسب‌وکارها</title>
+    <title>وکسایت | WEXITE — طراحی وب‌سایت مدرن برای کسب‌وکارها</title>
 
     <meta
         name="description"
-        content="اتمیر | طراحی و توسعه وب‌سایت‌های مدرن، سریع و موبایل‌فرندلی برای کسب‌وکارها."
+        content="وکسایت | طراحی و توسعه وب‌سایت‌های مدرن، سریع و موبایل‌فرندلی برای کسب‌وکارها."
     >
 
     <meta name="robots" content="index, follow">
-    <meta name="author" content="ATMIR">
+    <meta name="author" content="WEXITE">
 
     <!-- Language & Theme -->
     <meta name="theme-color" content="#0f172a">
@@ -43,17 +43,17 @@
     >
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="ATMIR | طراحی وب‌سایت برای کسب‌وکارها">
+    <meta property="og:title" content="WEXITE | طراحی وب‌سایت برای کسب‌وکارها">
     <meta property="og:description" content="طراحی وب‌سایت‌های مدرن، سریع و کاربرپسند برای کسب‌وکارها.">
-    <meta property="og:url" content="https://itsamirata.github.io/atmir/">
-    <meta property="og:image" content="https://itsamirata.github.io/atmir/images/logo.svg">
-    <meta property="og:site_name" content="ATMIR">
-    
+    <meta property="og:url" content="https://itsamirata.github.io/wexite/">
+    <meta property="og:image" content="https://itsamirata.github.io/wexite/images/logo.svg">
+    <meta property="og:site_name" content="WEXITE">
+
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="ATMIR | طراحی وب‌سایت برای کسب‌وکارها">
+    <meta name="twitter:title" content="WEXITE | طراحی وب‌سایت برای کسب‌وکارها">
     <meta name="twitter:description" content="طراحی وب‌سایت‌های مدرن، سریع و کاربرپسند برای کسب‌وکارها.">
-    <meta name="twitter:image" content="https://itsamirata.github.io/atmir/images/logo.svg">
+    <meta name="twitter:image" content="https://itsamirata.github.io/wexite/images/logo.svg">
     <style>
         @font-face {
             font-family: 'Estedad';
@@ -411,27 +411,6 @@
             position: relative;
         }
 
-        .hero-text::after {
-            content: '★';
-            position: absolute;
-            top: -20px;
-            left: -15px;
-            font-size: 3rem;
-            color: var(--gold);
-            -webkit-text-stroke: 2px #111;
-            transform: rotate(-15deg);
-        }
-
-        .hero-text::before {
-            content: '●';
-            position: absolute;
-            bottom: -15px;
-            right: -10px;
-            font-size: 2.5rem;
-            color: var(--pink);
-            -webkit-text-stroke: 2px #111;
-        }
-
         .hero-title {
             font-family: 'Estedad', 'Poppins', 'Rubik', sans-serif;
             font-size: clamp(2.2rem, 6vw, 3.8rem);
@@ -663,8 +642,8 @@
         .service-item:nth-child(2) { background: #FFA9E8; }
         .service-item:nth-child(3) { background: #C5C6FF; }
         .service-item:nth-child(4) { background: #A8F0E0; }
-        .service-item:nth-child(5) { background: #FFD6A5; }
-        .service-item:nth-child(6) { background: #B5EAD7; }
+        .service-item:nth-child(5) { background: #8df694; }
+        .service-item:nth-child(6) { background: #FFD6A5; }
 
         .service-item:hover {
             transform: translateY(-6px) rotate(0.5deg);
@@ -1359,6 +1338,61 @@
                 height: 80px;
             }
         }
+
+        /* =========================================================
+        WEXITE — Background Grid
+        ========================================================= */
+
+        .hero,
+        .section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* خود مشبک */
+        .hero::before,
+        .section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+
+            background-image:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.1) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgb(0, 0, 0, 0.1) 1px,
+                    transparent 1px
+                );
+
+            background-size: 70px 70px;
+
+            /* محو شدن به سمت لبه‌ها */
+            -webkit-mask-image: radial-gradient(
+                ellipse 90% 85% at center,
+                #000 0%,
+                rgba(0, 0, 0, 0.75) 55%,
+                transparent 100%
+            );
+
+            mask-image: radial-gradient(
+                ellipse 90% 85% at center,
+                #000 0%,
+                rgba(0, 0, 0, 0.75) 55%,
+                transparent 100%
+            );
+        }
+
+        /* تمام محتوای داخل سکشن بالای Grid */
+        .hero > *,
+        .section > * {
+            position: relative;
+            z-index: 1;
+        }
     </style>
 </head>
 
@@ -1367,7 +1401,7 @@
     <header id="header">
         <div class="container header-inner">
             <a href="#" class="logo">
-                <img src="images/logo.svg" alt="ATMIR">
+                <img src="images/logo.svg" alt="WEXITE">
             </a>
 
             <ul class="nav-links" id="navLinks">
@@ -1376,7 +1410,7 @@
                 <li><a href="#process">روند کار</a></li>
                 <li><a href="#why">چرا من؟</a></li>
                 <li><a href="#faq">سوالات</a></li>
-                <li><a href="#contact" class="nav-cta">تماس</a></li>
+                <li><a href="#contact" class="nav-cta">مشاوره</a></li>
             </ul>
 
             <button class="hamburger" id="hamburger" aria-label="منو">
@@ -1390,9 +1424,9 @@
         <div class="container hero-grid">
             <div class="hero-text">
 
-                <!-- ATMIR Logo -->
+                <!-- WEXITE Logo -->
                 <div class="hero-logo">
-                    <img src="images/logo.svg" alt="ATMIR">
+                    <img src="images/logo.svg" alt="WEXITE">
                 </div>
 
                 <h1 class="hero-title">
@@ -1422,7 +1456,7 @@
     <section class="section" id="projects" style="background: #FDF2D8;">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag"><i class="fas fa-folder-open"></i> پروژه‌های منتخب</span>
+                <span class="section-tag"><i class="fas fa-folder-open"></i>پروژه‌ها</span>
                 <h2>نمونه‌کارها</h2>
                 <p>چند پروژه‌ای که با دقت بالا طراحی شده‌اند.</p>
             </div>
@@ -1679,7 +1713,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <div class="logo">اتمیر <span>| ATMIR</span></div>
+                    <div class="logo">وکسایت <span style="font-family: fantasy ; font-size: 28px; color: #111111; font-weight: 100; letter-spacing: 2px;">| WEXITE</span></div>
                     <p>طراحی و توسعه وب مدرن با تمرکز بر تجربه کاربری عالی و کد تمیز. همراه شما از ایده تا اجرا.</p>
                 </div>
                 <div class="footer-links">
@@ -1700,7 +1734,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <span>© ۲۰۲۶ اتمیر | تمامی حقوق محفوظ است.</span>
+                <span>© ۲۰۲۶ وکسایت | تمامی حقوق محفوظ است.</span>
             </div>
         </div>
     </footer>
